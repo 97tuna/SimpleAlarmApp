@@ -18,6 +18,10 @@
 		772ABDEB27591EDF00C421CF /* SetAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772ABDEA27591EDF00C421CF /* SetAlarmViewController.swift */; };
 		772ABDEE27592B2300C421CF /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 772ABDEC27592B2300C421CF /* Model.xcdatamodeld */; };
 		772ABE1327592D9900C421CF /* AlarmInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772ABE1227592D9900C421CF /* AlarmInfoModel.swift */; };
+		772ABE17275B329800C421CF /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE14275B329700C421CF /* GmarketSansBold.otf */; };
+		772ABE18275B329800C421CF /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE15275B329700C421CF /* GmarketSansMedium.otf */; };
+		772ABE19275B329800C421CF /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE16275B329800C421CF /* GmarketSansLight.otf */; };
+		772ABE1C275B3B3A00C421CF /* CoreManager.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		772ABDEA27591EDF00C421CF /* SetAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetAlarmViewController.swift; sourceTree = "<group>"; };
 		772ABDED27592B2300C421CF /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		772ABE1227592D9900C421CF /* AlarmInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmInfoModel.swift; sourceTree = "<group>"; };
+		772ABE14275B329700C421CF /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
+		772ABE15275B329700C421CF /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
+		772ABE16275B329800C421CF /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
+		772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreManager.swift.swift; sourceTree = "<group>"; };
 		BF2DF8124E9F19E44262A90B /* Pods-ExternalProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExternalProj.debug.xcconfig"; path = "Target Support Files/Pods-ExternalProj/Pods-ExternalProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,10 +88,12 @@
 		772ABDD32759143900C421CF /* ExternalProj */ = {
 			isa = PBXGroup;
 			children = (
+				772ABE1A275B329D00C421CF /* Font */,
 				772ABDD42759143900C421CF /* AppDelegate.swift */,
 				772ABDD62759143900C421CF /* SceneDelegate.swift */,
 				772ABDD82759143900C421CF /* ViewController.swift */,
 				772ABDEA27591EDF00C421CF /* SetAlarmViewController.swift */,
+				772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */,
 				772ABDEC27592B2300C421CF /* Model.xcdatamodeld */,
 				772ABE1227592D9900C421CF /* AlarmInfoModel.swift */,
 				772ABDE827591C5A00C421CF /* AlarmCollectionViewCell.swift */,
@@ -93,6 +103,16 @@
 				772ABDE22759143A00C421CF /* Info.plist */,
 			);
 			path = ExternalProj;
+			sourceTree = "<group>";
+		};
+		772ABE1A275B329D00C421CF /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				772ABE14275B329700C421CF /* GmarketSansBold.otf */,
+				772ABE16275B329800C421CF /* GmarketSansLight.otf */,
+				772ABE15275B329700C421CF /* GmarketSansMedium.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		D271F8CE9B4F9CDAAA4A77C5 /* Frameworks */ = {
@@ -164,8 +184,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				772ABDE12759143A00C421CF /* LaunchScreen.storyboard in Resources */,
+				772ABE19275B329800C421CF /* GmarketSansLight.otf in Resources */,
 				772ABDDE2759143A00C421CF /* Assets.xcassets in Resources */,
 				772ABDDC2759143900C421CF /* Main.storyboard in Resources */,
+				772ABE17275B329800C421CF /* GmarketSansBold.otf in Resources */,
+				772ABE18275B329800C421CF /* GmarketSansMedium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				772ABDE927591C5A00C421CF /* AlarmCollectionViewCell.swift in Sources */,
+				772ABE1C275B3B3A00C421CF /* CoreManager.swift.swift in Sources */,
 				772ABDEB27591EDF00C421CF /* SetAlarmViewController.swift in Sources */,
 				772ABDD92759143900C421CF /* ViewController.swift in Sources */,
 				772ABE1327592D9900C421CF /* AlarmInfoModel.swift in Sources */,
@@ -377,9 +401,11 @@
 				DEVELOPMENT_TEAM = R29TK2NQQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExternalProj/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "알라미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,7 +417,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -406,9 +432,11 @@
 				DEVELOPMENT_TEAM = R29TK2NQQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ExternalProj/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "알라미";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -420,7 +448,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

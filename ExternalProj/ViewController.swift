@@ -11,14 +11,17 @@ import SnapKit
 import CoreData
 
 class ViewController: UIViewController {
-    @IBOutlet weak var Calendar: FSCalendar!
+    @IBOutlet weak var calendar: FSCalendar!
     
+    let request: NSFetchRequest<AlarmInfo> = AlarmInfo.fetchRequest()
+    var fetchResult = [AlarmInfo]()
+    var result: [AlarmInfoModel] = []
     let identifier = "AlarmCollectionViewCell"
     
     lazy var AlarmView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let size: CGSize = UIScreen.main.bounds.size
-        layout.itemSize = CGSize(width: size.width - 40, height: size.height * 0.3)
+        layout.itemSize = CGSize(width: size.width - 40, height: size.height * 0.05)
         layout.minimumLineSpacing = 20
         layout.scrollDirection = .vertical
         layout.sectionFootersPinToVisibleBounds = true
@@ -35,42 +38,61 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        fetchContact()
+        configureUI()
         self.settingCal()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        OperationQueue.main.addOperation { // DispatchQueue도 가능.
+            self.fetchContact()
+        }
+    }
+    
+    func configureUI() {
+        self.view.addSubview(self.AlarmView)
+        
+        self.AlarmView.snp.makeConstraints {
+            $0.left.equalTo(self.view.safeAreaLayoutGuide.snp.left).offset(20)
+            $0.right.equalTo(self.view.safeAreaLayoutGuide.snp.right).offset(-20)
+            $0.top.equalTo(self.calendar.snp.bottom).offset(-10)
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-10)
+        }
+    }
 }
 
 // MARK: 달력 설정
 extension ViewController {
     func settingCal() {
         // 달력의 평일 날짜 색깔
-        Calendar.appearance.titleDefaultColor = .black
+        calendar.appearance.titleDefaultColor = .black
         // 달력의 토,일 날짜 색깔
-        Calendar.appearance.titleWeekendColor = .red
+        calendar.appearance.titleWeekendColor = .red
         // 달력의 맨 위의 년도, 월의 색깔
-        Calendar.appearance.headerTitleColor = .systemPink
+        calendar.appearance.headerTitleColor = .systemPink
         // 달력의 요일 글자 색깔
-        Calendar.appearance.weekdayTextColor = .orange
+        calendar.appearance.weekdayTextColor = .orange
         
         // 달력의 년월 글자 바꾸기
-        Calendar.appearance.headerDateFormat = "YYYY년 M월"
+        calendar.appearance.headerDateFormat = "YYYY년 M월"
         
         // 달력의 요일 글자 바꾸는 방법 1
-        Calendar.locale = Locale(identifier: "ko_KR")
+        calendar.locale = Locale(identifier: "ko_KR")
         
         // 달력의 요일 글자 바꾸는 방법 2
-        Calendar.calendarWeekdayView.weekdayLabels[0].text = "일"
-        Calendar.calendarWeekdayView.weekdayLabels[1].text = "월"
-        Calendar.calendarWeekdayView.weekdayLabels[2].text = "화"
-        Calendar.calendarWeekdayView.weekdayLabels[3].text = "수"
-        Calendar.calendarWeekdayView.weekdayLabels[4].text = "목"
-        Calendar.calendarWeekdayView.weekdayLabels[5].text = "금"
-        Calendar.calendarWeekdayView.weekdayLabels[6].text = "토"
+        calendar.calendarWeekdayView.weekdayLabels[0].text = "일"
+        calendar.calendarWeekdayView.weekdayLabels[1].text = "월"
+        calendar.calendarWeekdayView.weekdayLabels[2].text = "화"
+        calendar.calendarWeekdayView.weekdayLabels[3].text = "수"
+        calendar.calendarWeekdayView.weekdayLabels[4].text = "목"
+        calendar.calendarWeekdayView.weekdayLabels[5].text = "금"
+        calendar.calendarWeekdayView.weekdayLabels[6].text = "토"
         
         // Delegate 설정
-        Calendar.delegate = self
-        Calendar.dataSource = self
+        calendar.delegate = self
+        calendar.dataSource = self
     }
 }
 
@@ -78,11 +100,16 @@ extension ViewController {
 extension ViewController: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         guard let modalPresentView = self.storyboard?.instantiateViewController(identifier: "SetAlarmViewController") as? SetAlarmViewController else { return }
-        
+        modalPresentView.searchCompletion = { flag in
+            if(flag){
+                self.fetchContact()
+            }
+        }
         // 날짜를 원하는 형식으로 저장하기 위한 방법입니다.
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        modalPresentView.date = dateFormatter.string(from: date)
+        let dateText = dateFormatter.string(from: date)
+        modalPresentView.date = "\(dateText)"
 
         self.present(modalPresentView, animated: true, completion: nil)
     }
@@ -100,12 +127,18 @@ extension ViewController: UICollectionViewDelegate {
 // MARK: UICollectionViewDataSource
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return result.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier, for: indexPath) as? AlarmCollectionViewCell else { return UICollectionViewCell() }
-
+        
+        let month = Calendar.current.dateComponents([.month], from: result[indexPath.row].date)
+        let day = Calendar.current.dateComponents([.day], from: result[indexPath.row].date)
+        
+        cell.date.text = "\(month.month!)월 \(day.day!)일"
+        cell.subject.text = result[indexPath.row].subject
+        cell.note.text = result[indexPath.row].note
         return cell
     }
 }
@@ -113,16 +146,14 @@ extension ViewController: UICollectionViewDataSource {
 // MARK: 데이터 불러오기_수정
 extension ViewController {
     func fetchContact() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-            
-        do {
-           let contact = try context.fetch(AlarmInfo.fetchRequest()) as! [AlarmInfo]
-           contact.forEach {
-               print($0.subject)
-          }
-        } catch {
-           print(error.localizedDescription)
+        result.removeAll()
+        var fetchResult = PersistenceManager.shared.fetch(request: request) // [AlarmInfo]
+        self.fetchResult = fetchResult
+        fetchResult.forEach {
+            let Info = AlarmInfoModel(activation: $0.activation, date: $0.date!, note: $0.note!, subject: $0.subject!)
+            result.append(Info)
         }
+        print("변환된 것 : \(result.count)")
+        AlarmView.reloadData()
     }
 }

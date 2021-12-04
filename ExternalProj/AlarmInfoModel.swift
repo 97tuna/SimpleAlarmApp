@@ -12,4 +12,11 @@ struct AlarmInfoModel {
     var date: Date
     var note: String
     var subject: String
+    
+    init(activation: Bool, date: Date, note: String, subject: String) {
+        self.activation = activation
+        self.date = date
+        self.note = note
+        self.subject = subject
+    }
 }

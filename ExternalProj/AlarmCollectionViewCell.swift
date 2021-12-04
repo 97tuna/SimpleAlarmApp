@@ -12,16 +12,23 @@ import UserNotifications
 class AlarmCollectionViewCell: UICollectionViewCell {
     lazy var date: UILabel = {
         let date = UILabel()
+        date.font = UIFont(name: "GmarketSansBold", size: CGFloat(15))
+        date.text = "12월 18일"
         return date
     }()
     
     lazy var subject: UILabel = {
         let subject = UILabel()
+        subject.font = UIFont(name: "GmarketSansMediun", size: CGFloat(15))
+        subject.text = "전자기학"
         return subject
     }()
     
     lazy var note: UILabel = {
         let note = UILabel()
+        note.font = UIFont(name: "GmarketSansLight", size: CGFloat(15))
+        note.text = "기말고사 00관"
+        note.numberOfLines = 2
         return note
     }()
     
@@ -41,16 +48,22 @@ class AlarmCollectionViewCell: UICollectionViewCell {
         self.addSubview(self.subject)
         self.addSubview(self.note)
         
-//        self.timePicker.snp.makeConstraints {
-//
-//        }
-//
-//        self.subject.snp.makeConstraints {
-//
-//        }
-//
-//        self.note.snp.makeConstraints {
-//
-//        }
+        self.date.snp.makeConstraints {
+            $0.left.equalTo(self.snp.left).offset(20)
+            $0.width.equalTo(self.snp.width).multipliedBy(0.25)
+            $0.centerY.equalTo(self.snp.centerY).offset(0)
+        }
+
+        self.subject.snp.makeConstraints {
+            $0.left.equalTo(self.snp.left).offset(20)
+            $0.width.equalTo(self.snp.width).multipliedBy(0.25)
+            $0.top.equalTo(self.date.snp.bottom).offset(5)
+        }
+
+        self.note.snp.makeConstraints {
+            $0.left.equalTo(self.subject.snp.right).offset(20)
+            $0.width.equalTo(self.snp.width).multipliedBy(0.6)
+            $0.centerY.equalTo(self.date.snp.centerY)
+        }
     }
 }
