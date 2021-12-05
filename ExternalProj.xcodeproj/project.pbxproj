@@ -21,7 +21,7 @@
 		772ABE17275B329800C421CF /* GmarketSansBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE14275B329700C421CF /* GmarketSansBold.otf */; };
 		772ABE18275B329800C421CF /* GmarketSansMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE15275B329700C421CF /* GmarketSansMedium.otf */; };
 		772ABE19275B329800C421CF /* GmarketSansLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 772ABE16275B329800C421CF /* GmarketSansLight.otf */; };
-		772ABE1C275B3B3A00C421CF /* CoreManager.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */; };
+		772ABE1C275B3B3A00C421CF /* CoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772ABE1B275B3B3A00C421CF /* CoreManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +42,7 @@
 		772ABE14275B329700C421CF /* GmarketSansBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansBold.otf; sourceTree = "<group>"; };
 		772ABE15275B329700C421CF /* GmarketSansMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansMedium.otf; sourceTree = "<group>"; };
 		772ABE16275B329800C421CF /* GmarketSansLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansLight.otf; sourceTree = "<group>"; };
-		772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreManager.swift.swift; sourceTree = "<group>"; };
+		772ABE1B275B3B3A00C421CF /* CoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreManager.swift; sourceTree = "<group>"; };
 		BF2DF8124E9F19E44262A90B /* Pods-ExternalProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExternalProj.debug.xcconfig"; path = "Target Support Files/Pods-ExternalProj/Pods-ExternalProj.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,7 +93,7 @@
 				772ABDD62759143900C421CF /* SceneDelegate.swift */,
 				772ABDD82759143900C421CF /* ViewController.swift */,
 				772ABDEA27591EDF00C421CF /* SetAlarmViewController.swift */,
-				772ABE1B275B3B3A00C421CF /* CoreManager.swift.swift */,
+				772ABE1B275B3B3A00C421CF /* CoreManager.swift */,
 				772ABDEC27592B2300C421CF /* Model.xcdatamodeld */,
 				772ABE1227592D9900C421CF /* AlarmInfoModel.swift */,
 				772ABDE827591C5A00C421CF /* AlarmCollectionViewCell.swift */,
@@ -242,7 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				772ABDE927591C5A00C421CF /* AlarmCollectionViewCell.swift in Sources */,
-				772ABE1C275B3B3A00C421CF /* CoreManager.swift.swift in Sources */,
+				772ABE1C275B3B3A00C421CF /* CoreManager.swift in Sources */,
 				772ABDEB27591EDF00C421CF /* SetAlarmViewController.swift in Sources */,
 				772ABDD92759143900C421CF /* ViewController.swift in Sources */,
 				772ABE1327592D9900C421CF /* AlarmInfoModel.swift in Sources */,

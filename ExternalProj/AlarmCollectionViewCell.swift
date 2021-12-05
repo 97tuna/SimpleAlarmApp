@@ -49,21 +49,22 @@ class AlarmCollectionViewCell: UICollectionViewCell {
         self.addSubview(self.note)
         
         self.date.snp.makeConstraints {
+            $0.top.equalTo(self.snp.top).offset(10)
             $0.left.equalTo(self.snp.left).offset(20)
-            $0.width.equalTo(self.snp.width).multipliedBy(0.25)
-            $0.centerY.equalTo(self.snp.centerY).offset(0)
+            $0.width.equalTo(self.snp.width).multipliedBy(0.3)
         }
 
         self.subject.snp.makeConstraints {
             $0.left.equalTo(self.snp.left).offset(20)
-            $0.width.equalTo(self.snp.width).multipliedBy(0.25)
+            $0.width.equalTo(self.snp.width).multipliedBy(0.3)
             $0.top.equalTo(self.date.snp.bottom).offset(5)
         }
 
         self.note.snp.makeConstraints {
             $0.left.equalTo(self.subject.snp.right).offset(20)
-            $0.width.equalTo(self.snp.width).multipliedBy(0.6)
-            $0.centerY.equalTo(self.date.snp.centerY)
+            $0.right.equalTo(self.snp.right).inset(20)
+            $0.height.equalTo(self.snp.height).offset(40)
+            $0.centerY.equalTo(self.snp.centerY)
         }
     }
 }

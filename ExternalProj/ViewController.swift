@@ -21,17 +21,20 @@ class ViewController: UIViewController {
     lazy var AlarmView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let size: CGSize = UIScreen.main.bounds.size
-        layout.itemSize = CGSize(width: size.width - 40, height: size.height * 0.05)
-        layout.minimumLineSpacing = 20
+        layout.itemSize = CGSize(width: size.width - 40, height: 60)
+        layout.minimumLineSpacing = 10
         layout.scrollDirection = .vertical
         layout.sectionFootersPinToVisibleBounds = true
-        
+
         let AlarmView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         self.view.addSubview(AlarmView)
         AlarmView.dataSource = self
         AlarmView.delegate = self
         AlarmView.isPagingEnabled = false
         AlarmView.backgroundColor = .clear
+        AlarmView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        AlarmView.layer.borderWidth = 1.0;
+        AlarmView.layer.cornerRadius = 5.0;
         AlarmView.register(AlarmCollectionViewCell.self, forCellWithReuseIdentifier: self.identifier)
         return AlarmView
     }()
@@ -42,6 +45,12 @@ class ViewController: UIViewController {
         fetchContact()
         configureUI()
         self.settingCal()
+//        let request: NSFetchRequest<AlarmInfo> = AlarmInfo.fetchRequest()
+//        PersistenceManager.shared.deleteAll(request: request)
+//        let arr = PersistenceManager.shared.fetch(request: request)
+//        if arr.isEmpty {
+//            print("clean") // Print "clean"
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

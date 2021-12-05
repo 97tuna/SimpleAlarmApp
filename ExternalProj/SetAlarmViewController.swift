@@ -72,7 +72,7 @@ class SetAlarmViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         self.pageTitle.text = date
-        
+        requestNotificationAuthorization()
     }
     
     @objc func pushBtn() {
@@ -90,9 +90,15 @@ class SetAlarmViewController: UIViewController {
         
         let cal = DateComponents(year: year.year, month: month.month, day: day.day, hour: hour.hour, minute: min.minute)
         let calDate = Calendar.current.date(from: cal)
-        // 노티 정보 저장
-        setNoti(subject: subject.text!, note: note.text, time: 5)
         
+        // 미래에서 - 오늘
+        let distanceSecond = Calendar.current.dateComponents([.second], from: Date(), to: calDate!).second
+        print("떨어져 있는 초 : \(distanceSecond)")
+        
+        // 노티 정보 저장, 0보다 큰 시간이 남아있어야지 알림 등록
+        if distanceSecond! > 0 {
+            setNoti(subject: subject.text!, note: note.text, time: Double(distanceSecond!))
+        }
         // DB에 저장
         saveInfo(date: calDate!, subject: subject.text!, note: note.text)
         
@@ -196,6 +202,15 @@ extension SetAlarmViewController {
             }
         }
     }
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
+
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { success, error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
+    }
 }
 
 extension SetAlarmViewController: UITextViewDelegate {
@@ -212,4 +227,18 @@ extension SetAlarmViewController: UITextViewDelegate {
       textView.textColor = UIColor.lightGray
     }
   }
+}
+
+extension ViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
 }
